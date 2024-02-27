@@ -1,0 +1,10 @@
+[
+	{
+    "Web": {
+        "Title": "url_apk",
+	"GoTo": "/urlApk/index.html",
+	"Description": "Crea apk a partir de la ruta Url",
+	"Image": "/urlApk/image.png"
+        }
+    }
+]

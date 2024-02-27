@@ -1,0 +1,55 @@
+Archivo './app/src/main/res/mipmap-hdpi/imagen.jpg' creado exitosamente.Archivo './app/src/main/res/mipmap-mdpi/imagen.jpg' creado exitosamente.Archivo './app/src/main/res/mipmap-xhdpi/imagen.jpg' creado exitosamente.Archivo './app/src/main/res/mipmap-xxhdpi/imagen.jpg' creado exitosamente.Archivo './app/src/main/res/mipmap-xxxhdpi/imagen.jpg' creado exitosamente.procesandoStarting a Gradle Daemon, 1 incompatible and 1 stopped Daemons could not be reused, use --status for details
+
+> Configure project :app
+Warning: The 'kotlin-android-extensions' Gradle plugin is deprecated. Please use this migration guide (https://goo.gle/kotlin-android-extensions-deprecation) to start working with View Binding (https://developer.android.com/topic/libraries/view-binding) and the 'kotlin-parcelize' plugin.
+
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preDebugBuild UP-TO-DATE
+> Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :app:dataBindingMergeDependencyArtifactsDebug UP-TO-DATE
+> Task :app:generateDebugResValues UP-TO-DATE
+> Task :app:generateDebugResources UP-TO-DATE
+> Task :app:packageDebugResources
+> Task :app:checkDebugAarMetadata UP-TO-DATE
+> Task :app:mapDebugSourceSetPaths
+> Task :app:createDebugCompatibleScreenManifests
+> Task :app:extractDeepLinksDebug UP-TO-DATE
+> Task :app:parseDebugLocalResources
+> Task :app:mergeDebugResources
+> Task :app:processDebugMainManifest
+> Task :app:dataBindingGenBaseClassesDebug UP-TO-DATE
+> Task :app:processDebugManifest
+> Task :app:javaPreCompileDebug UP-TO-DATE
+> Task :app:mergeDebugShaders UP-TO-DATE
+> Task :app:compileDebugShaders NO-SOURCE
+> Task :app:generateDebugAssets UP-TO-DATE
+> Task :app:mergeDebugAssets UP-TO-DATE
+> Task :app:compressDebugAssets UP-TO-DATE
+> Task :app:processDebugJavaRes NO-SOURCE
+> Task :app:checkDebugDuplicateClasses UP-TO-DATE
+> Task :app:desugarDebugFileDependencies UP-TO-DATE
+> Task :app:mergeExtDexDebug UP-TO-DATE
+> Task :app:mergeLibDexDebug UP-TO-DATE
+> Task :app:mergeDebugJniLibFolders UP-TO-DATE
+> Task :app:mergeDebugNativeLibs NO-SOURCE
+> Task :app:stripDebugDebugSymbols NO-SOURCE
+> Task :app:validateSigningDebug UP-TO-DATE
+> Task :app:writeDebugAppMetadata UP-TO-DATE
+> Task :app:writeDebugSigningConfigVersions UP-TO-DATE
+> Task :app:processDebugManifestForPackage
+> Task :app:processDebugResources
+
+> Task :app:compileDebugKotlin
+w: C:\Users\pavon\eclipse-workspace\Aplicacion_x64_v3\src\html\urlApk\app\src\main\java\com\example\myapplication\MainActivity.kt: (34, 19): 'onBackPressed(): Unit' is deprecated. Overrides deprecated member in 'androidx.core.app.ComponentActivity'. Deprecated in Java
+
+> Task :app:compileDebugJavaWithJavac UP-TO-DATE
+> Task :app:mergeDebugJavaResource UP-TO-DATE
+> Task :app:dexBuilderDebug
+> Task :app:mergeProjectDexDebug
+> Task :app:packageDebug
+> Task :app:createDebugApkListingFileRedirect
+> Task :app:assembleDebug
+
+BUILD SUCCESSFUL in 1m 4s
+33 actionable tasks: 14 executed, 19 up-to-date
+Salida del comando:

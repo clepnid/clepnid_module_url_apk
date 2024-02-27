@@ -1,0 +1,18 @@
+[
+	{
+		"Web": {
+			"TypeModule": "Sistema",
+			"Title": "url_apk",
+			"ComandOpen": "pip install pipreqs | pip install -r requirements.txt | python main.py [LOG=archivo_salida_url2apk.txt]",
+			"ComandClose": "taskkill /f /im python.exe",
+			"ChangePath": "yes",
+			"ListaRutas": [				
+				{
+					"RutaEjecutable": "localhost:7171/url_apk",
+					"RutaClepnid": "/url_apk",
+					"Tipo":"post"
+				}
+			]
+		}
+	}
+]

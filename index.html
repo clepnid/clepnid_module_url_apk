@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>url to Apk</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f8ff; /* Azul pastel */
+            color: #ffffff; /* Blanco */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 80%; /* Ancho predeterminado para pantallas mayores a 500px */
+        }
+        
+        h2 {
+            color: black;
+            text-align: center;
+        }
+        
+        form {
+            background-color: #87ceeb; /* Azul pastel más oscuro */
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 100%; /* Ancho completo para pantallas mayores a 500px */
+            max-width: 400px; /* Ancho máximo para pantallas menores a 500px */
+            margin-top: 20px; /* Añadir margen superior para separar el h2 y el form */
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #ffffff; /* Blanco */
+        }
+        
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            border: 1px solid #ffffff; /* Blanco */
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        
+        input[type="file"] {
+            border: none;
+        }
+        
+        button {
+            background-color: #1e90ff; /* Azul pastel más intenso */
+            color: #ffffff; /* Blanco */
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background-color: #4682b4; /* Cambiar color al pasar el ratón */
+        }
+        
+        /* Media query para pantallas menores a 500px */
+        @media only screen and (max-width: 500px) {
+            .container {
+                width: 80%; /* Ancho del 80% del body */
+            }
+        }
+
+        #loading-spinner {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 999;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-top: 4px solid #3498db;
+            /* Puedes cambiar el color */
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loading-spinner">
+        <!-- Puedes usar un spinner SVG o un elemento con clases de animación CSS -->
+        <div class="spinner"></div>
+    </div>
+    <div class="container">
+        <h2>Url2Apk</h2>
+
+        <form id="configForm">
+            <label for="urlPaginaWeb">URL de la Página Web:</label>
+            <input type="text" id="urlPaginaWeb" name="urlPaginaWeb" required>
+
+            <label for="nombreApp">Nombre de la Aplicación:</label>
+            <input type="text" id="nombreApp" name="nombreApp" required>
+
+            <label for="nombreArchivo">Nombre del Archivo:</label>
+            <input type="text" id="nombreArchivo" name="nombreArchivo" readonly required>
+
+            <label for="imagen">Seleccionar Archivo de Imagen:</label>
+            <input type="file" id="imagen" name="imagen" accept="image/*" required onchange="mostrarNombreArchivo()">
+
+            <button id="btnSub" type="button" onclick="enviarFormulario()">Enviar</button>
+        </form>
+    </div>
+
+
+    <script>
+        const loadingSpinner = document.getElementById('loading-spinner');
+        const btnSub = document.getElementById('btnSub');
+
+        // Mostrar la animación de carga antes de la solicitud Fetch
+        function showLoadingSpinner() {
+            loadingSpinner.style.display = 'block';
+            btnSub.disabled = true;
+        }
+
+        // Ocultar la animación de carga después de la solicitud Fetch
+        function hideLoadingSpinner() {
+            loadingSpinner.style.display = 'none';
+            btnSub.disabled = false;
+        }
+
+
+        function downloadFileFromServer(base64Data, fileName, mimeType) {
+            try {
+                // Parse JSON
+                const data = {
+                    base64_content: base64Data,
+                    mime_type: mimeType
+                };
+
+                // Decode base64 data
+                const decodedData = atob(data.base64_content);
+
+                // Convert decoded data to a Uint8Array
+                const uint8Array = new Uint8Array(decodedData.length);
+                for (let i = 0; i < decodedData.length; ++i) {
+                    uint8Array[i] = decodedData.charCodeAt(i);
+                }
+
+                // Create Blob from Uint8Array
+                const blob = new Blob([uint8Array], { type: data.mime_type || "application/octet-stream" });
+
+                // Create a download link and trigger click
+                const downloadLink = document.createElement("a");
+                downloadLink.href = URL.createObjectURL(blob);
+                downloadLink.download = fileName || "downloaded_file";
+                downloadLink.click();
+
+                console.log("File downloaded successfully");
+            } catch (error) {
+                console.error("Error:", error);
+            }
+        }
+
+        function mostrarNombreArchivo() {
+            var nombreArchivoInput = document.getElementById('nombreArchivo');
+            var imagenInput = document.getElementById('imagen');
+
+            if (imagenInput.files.length > 0) {
+                nombreArchivoInput.value = imagenInput.files[0].name;
+            } else {
+                nombreArchivoInput.value = '';
+            }
+        }
+        function arrayBufferToBase64(buffer) {
+            var binary = '';
+            var bytes = new Uint8Array(buffer);
+            var len = bytes.byteLength;
+            for (var i = 0; i < len; i++) {
+                binary += String.fromCharCode(bytes[i]);
+            }
+            return btoa(binary);
+        }
+        function enviarFormulario() {
+            var urlPaginaWeb = document.getElementById('urlPaginaWeb').value;
+            var nombreApp = document.getElementById('nombreApp').value;
+            var nombreArchivo = document.getElementById('nombreArchivo').value;
+            var imagenInput = document.getElementById('imagen');
+
+            // Leer el contenido del archivo como un Blob
+            var imagenBlob = imagenInput.files[0];
+
+            // Leer el contenido del archivo como ArrayBuffer
+            var reader = new FileReader();
+
+            showLoadingSpinner();
+
+            reader.onload = function () {
+                // Convertir el ArrayBuffer a base64
+                var imagenBase64 = arrayBufferToBase64(reader.result);
+
+                // Crear un objeto JavaScript con los valores
+                var formDataObject = {
+                    urlPaginaWeb: urlPaginaWeb,
+                    nombreApp: nombreApp,
+                    nombreArchivo: nombreArchivo,
+                    imagen: imagenBase64
+                };
+
+                // Convertir el objeto a una cadena JSON
+                var formDataJSON = JSON.stringify(formDataObject);
+
+                fetch('/url_apk', {
+                    method: 'POST',
+                    body: formDataJSON
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Respuesta del servidor:', data);
+                        downloadFileFromServer(data.base64_content, nombreApp + ".apk", data.mime_type);
+                    })
+                    .catch(error => {
+                        console.error('Error al enviar la solicitud:', error);
+                        alert('Error al crear app.');
+                    }).finally(() => {
+                        hideLoadingSpinner();
+                    });
+            };
+
+            // Leer el contenido del archivo como ArrayBuffer
+            reader.readAsArrayBuffer(imagenBlob);
+
+
+        }
+    </script>
+
+</body>
+
+</html>
